@@ -1,10 +1,6 @@
-// 'use client'
-import React, {Suspense, useState} from 'react'
+import React, {Suspense} from 'react'
 import {cn} from "@/lib/utils";
 import {Title} from "@/components/shared/title";
-import {getSkills} from "@/services/skill";
-import {useQuery} from "@tanstack/react-query";
-import ErrorHandler from "@/components/shared/ErrorHandler";
 import FilterItems from "@/components/shared/filter/filter-items";
 
 interface Props {
@@ -13,7 +9,7 @@ interface Props {
 
 export const dynamic = 'force-dynamic'
 
-const Filter: React.FC<Props> = async ({className}) => {
+const Filter: React.FC<Props> = ({className}) => {
     // const {isPending, error, data, refetch} = useQuery({
     //     queryKey: ['skills'],
     //     queryFn: () => getSkills()
