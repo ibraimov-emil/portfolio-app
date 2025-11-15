@@ -27,9 +27,7 @@
       "required": false,
       "allowedTypes": [
         "images",
-        "files",
-        "videos",
-        "audios"
+        "videos"
       ]
     },
     "skills": {
@@ -38,6 +36,9 @@
       "target": "api::skill.skill"
     },
     "link": {
+      "type": "string"
+    },
+    "componentLink": {
       "type": "string"
     }
   }

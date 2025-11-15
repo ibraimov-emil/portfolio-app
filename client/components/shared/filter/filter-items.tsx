@@ -9,7 +9,6 @@ const FilterItems = async () => {
     let skills
     try {
         skills = await getSkills()
-        console.log(skills)
     } catch (error) {
         return <ErrorHandler error={error?.toString()}/>
     }

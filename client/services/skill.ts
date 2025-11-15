@@ -1,5 +1,5 @@
 import {axiosInstance} from "@/services/axios";
-import {SkillItem, SkillsCombine} from "@/types/skill";
+import {SkillsCombine} from "@/types/skill";
 
 export const getSkills = async (): Promise<SkillsCombine> => {
     const {data} = await axiosInstance.get('/skills?populate=*');

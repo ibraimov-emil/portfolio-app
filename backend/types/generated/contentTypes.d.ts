@@ -803,13 +803,14 @@ export interface ApiPracticePractice extends Schema.CollectionType {
     title: Attribute.String;
     description: Attribute.Text;
     componentName: Attribute.String;
-    Preview: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    Preview: Attribute.Media<'images' | 'videos', true>;
     skills: Attribute.Relation<
       'api::practice.practice',
       'oneToMany',
       'api::skill.skill'
     >;
     link: Attribute.String;
+    componentLink: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
