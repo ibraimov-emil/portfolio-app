@@ -4,7 +4,6 @@ import {getSkills} from "@/services/skill";
 import CheckboxFilterGroup from "@/components/shared/filter/checkbox-filter-group";
 import ErrorHandler from "@/components/shared/ErrorHandler";
 
-
 const FilterItems = async () => {
     let skills
     try {
@@ -15,7 +14,6 @@ const FilterItems = async () => {
 
     return (
         <>
-            {/*{skills?.data?.map(item => item.attributes.name)}*/}
             <CheckboxFilterGroup items={skills}/>
         </>
     )

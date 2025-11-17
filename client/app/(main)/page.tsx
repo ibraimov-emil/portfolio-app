@@ -8,7 +8,7 @@ export default async function Page() {
     return (
         <>
             <section>
-                <Container className={`flex flex-col items-center`}>
+                <Container className={`flex flex-col items-center mt-12`}>
                     <div className={'w-1/2'}>
                         <Title text={'Hello. I am Emil Ibraimov.'} size={'2xl'} className={'font-bold'}/>
                         <p>
@@ -27,7 +27,7 @@ export default async function Page() {
                 <Container>
                     <div className="grid grid-cols-12 gap-[1.875rem]">
                         <Filter className={'col-span-3'}/>
-                        <PracticeGroupList className={`col-span-9`}/>
+                        <PracticeGroupList className={`col-span-9`} />
                     </div>
                 </Container>
             </section>

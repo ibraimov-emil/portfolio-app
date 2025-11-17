@@ -1,4 +1,4 @@
-import {Github, Home} from "lucide-react";
+import {Github, Home, User, FileText} from "lucide-react";
 
 export const NAVBAR = {
     main: [
@@ -6,6 +6,16 @@ export const NAVBAR = {
             label: 'Home',
             href: '/',
             icon: <Home />
+        },
+        {
+            label: 'About',
+            href: '/about',
+            icon: <User />
+        },
+        {
+            label: 'Resume',
+            href: '/resume',
+            icon: <FileText />
         }
     ],
     social: [

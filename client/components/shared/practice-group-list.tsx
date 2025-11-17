@@ -1,10 +1,11 @@
 import React, {Suspense} from 'react'
 import {Title} from "@/components/shared/title";
-import PracticeItems from "@/components/shared/practice-items";
+import PracticeItemsWrapper from "@/components/shared/practice-items-wrapper";
 
 interface Props {
     items?: any[]
     className?: string
+    skillIds?: string[]
 }
 
 const PracticeGroupList: React.FC<Props> = (props) => {
@@ -13,8 +14,8 @@ const PracticeGroupList: React.FC<Props> = (props) => {
     return (
         <div className={className}>
             <Title text={'Practice'} size={'lg'} className={'mb-6 font-semibold'}/>
-            <Suspense fallback={<div>Loading...</div>}>
-                <PracticeItems/>
+            <Suspense fallback={<div>Loading practices...</div>}>
+                <PracticeItemsWrapper />
             </Suspense>
         </div>
     )
