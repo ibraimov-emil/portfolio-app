@@ -1,12 +1,8 @@
 'use client'
-import React, {FC, useState} from 'react'
+import React, {FC} from 'react'
 import {SkillsCombine} from "@/types/skill";
 import FilterCheckbox from "@/components/shared/filter/filter-checkbox";
-import {it} from "node:test";
 import {useFilters} from "@/hooks/use-filters";
-import {useQueryFilters} from "@/hooks/use-query-filters";
-import filter from "@/components/shared/filter/filter";
-import {Heading} from "lucide-react";
 import {Title} from "@/components/shared/title";
 
 interface Props {
@@ -16,7 +12,6 @@ interface Props {
 const CheckboxFilterGroup: FC<Props> = (props) => {
     const {items} = props
     const filters = useFilters()
-    useQueryFilters(filters)
 
     const advancedSkills = items?.data.filter(item => item.attributes.type === 'advanced')
     const mediumSkills = items?.data.filter(item => item.attributes.type === 'medium')
@@ -32,8 +27,9 @@ const CheckboxFilterGroup: FC<Props> = (props) => {
                                 key={item.id}
                                 text={item.attributes.name}
                                 value={item.id}
-                                onCheckedChange={() => filters.setSelectedIngredients(item.id.toString())}
-                                checked={filters.selectedIngredients?.has(item.id.toString())}
+                                onCheckedChange={() => filters.setSelectedSkills(item.id.toString())}
+                                checked={filters.selectedSkills?.has(item.id.toString())}
+                                name="skill"
                             />
                         )}
                     </div>
@@ -48,8 +44,9 @@ const CheckboxFilterGroup: FC<Props> = (props) => {
                             key={item.id}
                             text={item.attributes.name}
                             value={item.id}
-                            onCheckedChange={() => filters.setSelectedIngredients(item.id.toString())}
-                            checked={filters.selectedIngredients?.has(item.id.toString())}
+                            onCheckedChange={() => filters.setSelectedSkills(item.id.toString())}
+                            checked={filters.selectedSkills?.has(item.id.toString())}
+                            name="skill"
                         />
                     )}
                 </div>
@@ -63,8 +60,9 @@ const CheckboxFilterGroup: FC<Props> = (props) => {
                             key={item.id}
                             text={item.attributes.name}
                             value={item.id}
-                            onCheckedChange={() => filters.setSelectedIngredients(item.id.toString())}
-                            checked={filters.selectedIngredients?.has(item.id.toString())}
+                            onCheckedChange={() => filters.setSelectedSkills(item.id.toString())}
+                            checked={filters.selectedSkills?.has(item.id.toString())}
+                            name="skill"
                         />
                     )}
                 </div>

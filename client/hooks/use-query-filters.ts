@@ -1,32 +1,30 @@
 import React from 'react';
 import { Filters } from './use-filters';
-import qs from 'qs';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 export const useQueryFilters = (filters: Filters) => {
   const isMounted = React.useRef(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   React.useEffect(() => {
     if (isMounted.current) {
-      const params = {
-        ...filters.prices,
-        pizzaTypes: Array.from(filters.pizzaTypes),
-        sizes: Array.from(filters.sizes),
-        ingredients: Array.from(filters.selectedIngredients),
-      };
+      const skillsArray = Array.from(filters.selectedSkills);
+      
+      const params = new URLSearchParams();
+      if (skillsArray.length > 0) {
+        params.set('skills', skillsArray.join(','));
+      }
 
-      const query = qs.stringify(params, {
-        arrayFormat: 'comma',
-      });
+      const queryString = params.toString();
+      const newUrl = queryString ? `${pathname}?${queryString}` : pathname;
 
-      router.push(`?${query}`, {
+      // Use replace instead of push for faster updates without adding to history
+      router.replace(newUrl, {
         scroll: false,
       });
-
-      console.log(filters, 999);
     }
 
     isMounted.current = true;
-  }, [filters]);
+  }, [filters.selectedSkills, router, pathname]);
 };
