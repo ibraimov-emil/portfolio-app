@@ -3,10 +3,11 @@ import {Title} from "@/components/shared/title";
 import {Container} from "@/components/shared/container";
 import Filter from "@/components/shared/filter/filter";
 import PracticeGroupList from "@/components/shared/practice-group-list";
+import HomePageLayout from './page-layout';
 
 export default async function Page() {
     return (
-        <>
+        <HomePageLayout>
             <section>
                 <Container className={`flex flex-col items-center mt-12`}>
                     <div className={'w-1/2'}>
@@ -31,6 +32,6 @@ export default async function Page() {
                     </div>
                 </Container>
             </section>
-        </>
+        </HomePageLayout>
     )
 }

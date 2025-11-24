@@ -18,6 +18,12 @@ const config = {
       },
     },
     extend: {
+      scale: {
+        115: '1.15',
+      },
+      transitionTimingFunction: {
+        'cubic': 'cubic-bezier(0.4, 0.0, 0.2, 1)', // пример, можешь поставить свой
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
