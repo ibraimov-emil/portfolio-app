@@ -23,7 +23,7 @@ const Navbar = () => {
                                 href={item.href}
                                 className={cn(
                                     buttonVariants({variant: "ghost", size: "icon"}),
-                                    "size-12 flex flex-col"
+                                    "size-13 flex flex-col px-2 pt-[2px]"
                                 )}
                             >
                                 {item.icon}
