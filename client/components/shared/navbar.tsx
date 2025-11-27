@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react'
 import {Dock, DockIcon} from "@/components/magicui/dock";
 import Link from "next/link";
@@ -7,6 +9,7 @@ import {cn} from "@/lib/utils";
 import {buttonVariants} from "@/components/ui/button";
 import {Separator} from "@/components/ui/separator";
 import {ModeToggle} from "@/components/shared/mode-toggle";
+import {AuthButton} from "@/components/auth/auth-button";
 
 const Navbar = () => {
     return (
@@ -64,6 +67,10 @@ const Navbar = () => {
                                 <p>Theme</p>
                             </TooltipContent>
                         </Tooltip>
+                    </DockIcon>
+                    <Separator orientation="vertical" className="h-full py-2"/>
+                    <DockIcon>
+                        <AuthButton />
                     </DockIcon>
                 </Dock>
             </TooltipProvider>
