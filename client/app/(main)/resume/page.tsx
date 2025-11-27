@@ -9,6 +9,7 @@ import ShareResumeButtonWrapper from "@/components/shared/share-resume-button-wr
 import SelectedSkillsSummary from "@/components/shared/selected-skills-summary";
 import PracticeItemsWrapper from "@/components/shared/practice-items-wrapper";
 import SkillsCartWrapper from "@/components/shared/skills-cart-wrapper";
+import ErrorHandler from "@/components/shared/ErrorHandler";
 
 export const metadata: Metadata = {
     title: "Resume | Emil Ibraimov",
@@ -18,7 +19,12 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic'
 
 export default async function ResumePage() {
-    const skills = await getSkills()
+    let skills
+    try {
+        skills = await getSkills()
+    } catch (error) {
+        return <ErrorHandler error={error?.toString()}/>
+    }
 
     return (
         <div className="min-h-screen py-12">
