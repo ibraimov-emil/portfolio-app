@@ -5,6 +5,7 @@ import PracticeCard from "@/components/shared/practice-card";
 import {cn} from "@/lib/utils";
 import Link from "next/link";
 import {PracticesCombine} from "@/types/practice";
+import {LanguageToggle} from "@/components/shared/language-toggle";
 
 interface PracticeItemsProps {
     practice: PracticesCombine
@@ -19,9 +20,11 @@ const PracticeItems: React.FC<PracticeItemsProps> = ({practice}) => {
         <div className={cn('grid grid-cols-3 gap-7')}>
             {practice.data.length > 0 ? (
                 practice.data.map(item => (
-                    <Link key={item.id} href={`/practice/${item.id}`}>
-                        <PracticeCard practice={item} />
-                    </Link>
+                    // <Link key={item.id} href={`/practice/${item.id}`}>
+                    <PracticeCard key={item.id} practice={item}>
+                        {item.attributes.title == 'i18n' ?  <div className={`mt-4`}> <LanguageToggle/> </div> : null}
+                    </PracticeCard>
+                    // </Link>
                 ))
             ) : (
                 <div className="col-span-3 text-center py-12 text-gray-500">
