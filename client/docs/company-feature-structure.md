@@ -32,7 +32,7 @@ This document describes the organization of the company management feature, foll
   - `CompanyFormData` - Form data structure
   - `CompanyCreatePayload` - API payload structure
 
-### 5. UI Components (`/app/(main)/practice/1/company`)
+### 5. UI Components (`/app/(main)/practice/tanstack/company`)
 
 #### Pages
 - **create/page.tsx** - Create company page

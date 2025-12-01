@@ -5,6 +5,18 @@ export interface CompaniesCombine {
     meta: Meta
 }
 
+export interface CompanyLocalizations {
+    data: Array<{
+        id: number;
+        attributes: {
+            name: string;
+            description: string;
+            shortDescription: string;
+            locale: string;
+        };
+    }>;
+}
+
 export interface CompanyItem {
     id: number
     attributes: {
@@ -16,6 +28,8 @@ export interface CompanyItem {
         description: string;
         shortDescription: string;
         photo: Photo;
+        locale?: string;
+        localizations?: CompanyLocalizations;
     }
 }
 

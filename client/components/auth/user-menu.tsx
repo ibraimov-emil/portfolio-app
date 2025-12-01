@@ -26,7 +26,7 @@ export function UserMenu() {
         .slice(0, 2);
 
     return (
-        <DropdownMenu>
+        <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="relative h-12 w-12 rounded-full">
                     <Avatar className="h-10 w-10">
