@@ -5,15 +5,16 @@ import {PracticeItem} from "@/types/practice";
 import Image from "next/image";
 
 interface PracticeCardProps {
-    practice: PracticeItem
+    practice: PracticeItem,
+    children?: React.ReactNode,
 }
 
-const PracticeCard: React.FC<PracticeCardProps> = ({practice}) => {
+const PracticeCard: React.FC<PracticeCardProps> = ({practice, children}) => {
     const previewImage = practice.attributes.Preview?.data?.[0]
     const skills = practice.attributes.skills?.data || []
 
     return (
-        <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer">
+        <Card className="h-full hover:shadow-lg transition-shadow flex flex-col">
             {previewImage && (
                 <div className="relative w-full h-48 overflow-hidden rounded-t-lg">
                     <Image
@@ -27,8 +28,8 @@ const PracticeCard: React.FC<PracticeCardProps> = ({practice}) => {
             <CardHeader>
                 <CardTitle>{practice.attributes.title}</CardTitle>
             </CardHeader>
-            <CardContent>
-                <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
+            <CardContent className={`h-full flex flex-col justify-between`}>
+                <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3 mb-auto">
                     {practice.attributes.description}
                 </p>
                 {skills.length > 0 && (
@@ -48,12 +49,12 @@ const PracticeCard: React.FC<PracticeCardProps> = ({practice}) => {
                         )}
                     </div>
                 )}
+                {children}
             </CardContent>
             {practice.attributes.link && (
                 <CardFooter>
                     <a
-                        href={practice.attributes.link}
-                        target="_blank"
+                        href={`/practice/${practice.attributes.link}`}
                         rel="noopener noreferrer"
                         className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
                         onClick={(e) => e.stopPropagation()}

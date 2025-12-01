@@ -37,7 +37,7 @@ export function useCreateCompany() {
                 title: "Success",
                 description: "Company created successfully",
             });
-            router.push("/practice/1");
+            router.push("/practice/tanstack");
             router.refresh();
         },
         onError: (error) => {
@@ -83,7 +83,7 @@ export function useUpdateCompany(companyId: number) {
                 title: "Success",
                 description: "Company updated successfully",
             });
-            router.push(`/practice/1/company/${companyId}`);
+            router.push(`/practice/tanstack/company/${companyId}`);
             router.refresh();
         },
         onError: (error) => {
@@ -112,7 +112,7 @@ export function useDeleteCompany() {
                 title: "Success",
                 description: "Company deleted successfully",
             });
-            router.push("/practice/1");
+            router.push("/practice/tanstack");
             router.refresh();
         },
         onError: (error) => {

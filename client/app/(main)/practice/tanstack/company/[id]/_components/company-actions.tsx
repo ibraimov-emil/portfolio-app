@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Pencil, Trash2, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -25,12 +26,13 @@ interface CompanyActionsProps {
 }
 
 export function CompanyActions({ companyId, companyName }: CompanyActionsProps) {
+    const t = useTranslations('companyDetail');
     const router = useRouter();
     const deleteCompanyMutation = useDeleteCompany();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     const handleEdit = () => {
-        router.push(`/practice/1/company/${companyId}/edit`);
+        router.push(`/practice/tanstack/company/${companyId}/edit`);
     };
 
     const handleDelete = () => {
@@ -47,7 +49,7 @@ export function CompanyActions({ companyId, companyName }: CompanyActionsProps) 
                 disabled={deleteCompanyMutation.isPending}
             >
                 <Pencil className="mr-2 h-4 w-4" />
-                Edit
+                {t('edit')}
             </Button>
 
             <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -62,24 +64,23 @@ export function CompanyActions({ companyId, companyName }: CompanyActionsProps) 
                         ) : (
                             <Trash2 className="mr-2 h-4 w-4" />
                         )}
-                        Delete
+                        {t('delete')}
                     </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                        <AlertDialogTitle>{t('deleteConfirmTitle')}</AlertDialogTitle>
                         <AlertDialogDescription>
-                            This will permanently delete <strong>{companyName}</strong>.
-                            This action cannot be undone.
+                            {t('deleteConfirmDescription', { name: companyName }).replace('{name}', companyName)}
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
                         <AlertDialogAction
                             onClick={handleDelete}
                             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                         >
-                            Delete
+                            {t('delete')}
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>

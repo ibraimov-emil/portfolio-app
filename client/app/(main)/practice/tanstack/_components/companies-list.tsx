@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Loader2, Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,7 @@ import { useCompaniesInfinite } from "@/hooks/use-companies-infinite";
 import { useDebounce } from "@/hooks/use-debounce";
 
 export function CompaniesList() {
+    const t = useTranslations('practice');
     const [searchQuery, setSearchQuery] = useState("");
     const debouncedSearch = useDebounce(searchQuery, 500);
     const observerTarget = useRef<HTMLDivElement>(null);
@@ -58,14 +60,14 @@ export function CompaniesList() {
                     <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
                         type="text"
-                        placeholder="Search companies..."
+                        placeholder={t('searchPlaceholder')}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="pl-9"
                     />
                 </div>
-                <Link href="/practice/1/company/create">
-                    <Button variant="outline">Create company</Button>
+                <Link href="/practice/tanstack/company/create">
+                    <Button variant="outline">{t('createCompany')}</Button>
                 </Link>
             </div>
 
@@ -82,7 +84,7 @@ export function CompaniesList() {
             {isError && (
                 <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-center">
                     <p className="text-sm text-destructive">
-                        Failed to load companies. Please try again.
+                        {t('loadError')}
                     </p>
                 </div>
             )}
@@ -94,20 +96,27 @@ export function CompaniesList() {
                         <div className="rounded-lg border border-dashed p-12 text-center">
                             <p className="text-muted-foreground">
                                 {searchQuery
-                                    ? "No companies found matching your search."
-                                    : "No companies yet. Create your first company!"}
+                                    ? t('noResults')
+                                    : t('noCompanies')}
                             </p>
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-                            {allCompanies.map((company) => (
-                                <Link
-                                    href={`/practice/1/company/${company.id}`}
-                                    key={company.id}
-                                >
-                                    <CompanyCard company={company} />
-                                </Link>
-                            ))}
+                            {allCompanies.map((company) => {
+                                const hasLocalizations = company.attributes.localizations && 
+                                                        company.attributes.localizations.data.length > 0;
+                                
+                                return hasLocalizations ? (
+                                    <CompanyCard key={company.id} company={company} hasLink={false} />
+                                ) : (
+                                    <Link
+                                        href={`/practice/tanstack/company/${company.id}`}
+                                        key={company.id}
+                                    >
+                                        <CompanyCard company={company} hasLink={true} />
+                                    </Link>
+                                );
+                            })}
                         </div>
                     )}
 
@@ -123,7 +132,7 @@ export function CompaniesList() {
                     {/* End of List Message */}
                     {!hasNextPage && allCompanies.length > 0 && (
                         <div className="text-center text-sm text-muted-foreground">
-                            You&#39;ve reached the end of the list
+                            {t('endOfList')}
                         </div>
                     )}
                 </>
