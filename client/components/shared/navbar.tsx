@@ -10,6 +10,7 @@ import {buttonVariants} from "@/components/ui/button";
 import {Separator} from "@/components/ui/separator";
 import {ModeToggle} from "@/components/shared/mode-toggle";
 import {AuthButton} from "@/components/auth/auth-button";
+import {LanguageToggle} from "@/components/shared/language-toggle";
 
 const Navbar = () => {
     return (
@@ -57,6 +58,17 @@ const Navbar = () => {
                             </Tooltip>
                         </DockIcon>
                     ))}
+                    <Separator orientation="vertical" className="h-full py-2"/>
+                    <DockIcon>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <LanguageToggle/>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>Language</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </DockIcon>
                     <Separator orientation="vertical" className="h-full py-2"/>
                     <DockIcon>
                         <Tooltip>

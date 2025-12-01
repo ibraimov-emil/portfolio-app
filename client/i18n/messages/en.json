@@ -1,0 +1,50 @@
+{
+  "dictionary": {
+    "skills": "My skills",
+    "practice": "Practice",
+    "advanced": "Advanced",
+    "medium": "Medium",
+    "start": "Start"
+  },
+  "main": {
+    "title": "Hello. I am Emil Ibraimov.",
+    "description": "A front-end developer with 3.5 years of experience specializing in creating responsive and user-friendly web applications using modern frameworks like React and Next.js.\n I'm passionate about solving complex problems, continuously learning new technologies, and building clean, maintainable code. This website showcases my technical expertise and projects that highlight my skills in real-time applications, state management, and asynchronous operations."
+  },
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "resume": "Resume",
+    "theme": "Theme",
+    "language": "Language"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register"
+  },
+  "practice": {
+    "searchPlaceholder": "Search companies...",
+    "createCompany": "Create company",
+    "noCompanies": "No companies yet. Create your first company!",
+    "noResults": "No companies found matching your search.",
+    "endOfList": "You've reached the end of the list",
+    "loadError": "Failed to load companies. Please try again.",
+    "selectLanguage": "Select language"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error"
+  },
+  "companyDetail": {
+    "backToCompanies": "Back to Companies",
+    "edit": "Edit",
+    "delete": "Delete",
+    "about": "About",
+    "created": "Created",
+    "lastUpdated": "Last Updated",
+    "deleteConfirmTitle": "Are you sure?",
+    "deleteConfirmDescription": "This will permanently delete {name}. This action cannot be undone.",
+    "cancel": "Cancel",
+    "selectLanguageVersion": "Select language version"
+  }
+}
