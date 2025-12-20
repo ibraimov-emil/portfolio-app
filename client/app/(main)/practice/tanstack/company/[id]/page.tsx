@@ -25,23 +25,23 @@ export default async function CompanyDetailPage({ params }: PageParams) {
         const t = createServerTranslator(messages);
 
         // Check if company has localizations
-        const hasLocalizations = company.attributes.localizations && 
-                                company.attributes.localizations.data.length > 0;
+        const hasLocalizations = company.localizations && 
+                                company.localizations.length > 0;
 
         // Get all available language versions
         const languageVersions = hasLocalizations
             ? [
                 { 
-                    locale: company.attributes.locale || 'en', 
-                    name: company.attributes.name,
-                    shortDescription: company.attributes.shortDescription,
-                    description: company.attributes.description
+                    locale: company.locale || 'en', 
+                    name: company.name,
+                    shortDescription: company.shortDescription,
+                    description: company.description
                 },
-                ...company.attributes.localizations!.data.map(loc => ({
-                    locale: loc.attributes.locale,
-                    name: loc.attributes.name,
-                    shortDescription: loc.attributes.shortDescription,
-                    description: loc.attributes.description
+                ...company.localizations!.map(loc => ({
+                    locale: loc.locale,
+                    name: loc.name,
+                    shortDescription: loc.shortDescription,
+                    description: loc.description
                 }))
               ]
             : null;
@@ -50,10 +50,10 @@ export default async function CompanyDetailPage({ params }: PageParams) {
         const currentContent = languageVersions
             ? languageVersions.find(v => v.locale === locale) || languageVersions[0]
             : {
-                locale: company.attributes.locale || 'en',
-                name: company.attributes.name,
-                shortDescription: company.attributes.shortDescription,
-                description: company.attributes.description
+                locale: company.locale || 'en',
+                name: company.name,
+                shortDescription: company.shortDescription,
+                description: company.description
               };
 
         return (
@@ -66,7 +66,7 @@ export default async function CompanyDetailPage({ params }: PageParams) {
                         </Button>
                     </Link>
                     <CompanyActions 
-                        companyId={company.id} 
+                        companyId={company.documentId} 
                         companyName={currentContent.name}
                     />
                 </div>
@@ -74,12 +74,12 @@ export default async function CompanyDetailPage({ params }: PageParams) {
                 <Card>
                     <CardHeader>
                         <div className="flex flex-col gap-6 md:flex-row md:items-start">
-                            {company.attributes.photo?.data?.[0] && (
+                            {company.photo && company.photo.length > 0 && (
                                 <div className="relative h-32 w-32 flex-shrink-0 overflow-hidden rounded-lg">
                                     <Image
                                         src={
                                             process.env.NEXT_PUBLIC_API_URL_IMAGE +
-                                            company.attributes.photo.data[0].attributes.url
+                                            company.photo[0].url
                                         }
                                         alt={currentContent.name}
                                         fill
@@ -116,11 +116,11 @@ export default async function CompanyDetailPage({ params }: PageParams) {
                             <div className="grid gap-4 text-sm md:grid-cols-2">
                                 <div>
                                     <span className="font-medium">{t('companyDetail.created')}:</span>{" "}
-                                    {new Date(company.attributes.createdAt).toLocaleDateString(locale)}
+                                    {new Date(company.createdAt).toLocaleDateString(locale)}
                                 </div>
                                 <div>
                                     <span className="font-medium">{t('companyDetail.lastUpdated')}:</span>{" "}
-                                    {new Date(company.attributes.updatedAt).toLocaleDateString(locale)}
+                                    {new Date(company.updatedAt).toLocaleDateString(locale)}
                                 </div>
                             </div>
                         </div>

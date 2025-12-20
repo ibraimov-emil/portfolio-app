@@ -7,6 +7,8 @@ import {AuthProvider} from "@/contexts/auth-context";
 import {NextIntlClientProvider} from 'next-intl';
 import {getLocale, getMessages} from '@/lib/locale';
 import type {Locale} from '@/i18n/config';
+import { Provider as ReduxProvider } from 'react-redux';
+import { store } from '@/store';
 
 const queryClient = new QueryClient()
 
@@ -46,12 +48,14 @@ export const Providers: React.FC<React.PropsWithChildren> = ({children}) => {
         <>
             <NextIntlClientProvider locale={locale} messages={messages}>
                 <ThemeProvider attribute="class" defaultTheme="light">
-                    <QueryClientProvider client={queryClient}>
-                        <AuthProvider>
-                            {children}
-                            <Toaster />
-                        </AuthProvider>
-                    </QueryClientProvider>
+                    <ReduxProvider store={store}>
+                        <QueryClientProvider client={queryClient}>
+                            <AuthProvider>
+                                {children}
+                                <Toaster />
+                            </AuthProvider>
+                        </QueryClientProvider>
+                    </ReduxProvider>
                 </ThemeProvider>
             </NextIntlClientProvider>
         </>

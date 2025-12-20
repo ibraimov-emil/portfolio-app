@@ -28,14 +28,14 @@ interface CompanyEditFormProps {
 
 export function CompanyEditForm({ company }: CompanyEditFormProps) {
     const router = useRouter();
-    const updateCompanyMutation = useUpdateCompany(company.id);
+    const updateCompanyMutation = useUpdateCompany(company.documentId);
 
     const form = useForm<CompanyFormValues>({
         resolver: zodResolver(companyFormSchema),
         defaultValues: {
-            name: company.attributes.name,
-            shortDescription: company.attributes.shortDescription,
-            description: company.attributes.description,
+            name: company.name,
+            shortDescription: company.shortDescription,
+            description: company.description,
         },
     });
 

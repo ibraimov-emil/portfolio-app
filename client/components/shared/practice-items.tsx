@@ -20,11 +20,9 @@ const PracticeItems: React.FC<PracticeItemsProps> = ({practice}) => {
         <div className={cn('grid grid-cols-3 gap-7')}>
             {practice.data.length > 0 ? (
                 practice.data.map(item => (
-                    // <Link key={item.id} href={`/practice/${item.id}`}>
-                    <PracticeCard key={item.id} practice={item}>
-                        {item.attributes.title == 'i18n' ?  <div className={`mt-4`}> <LanguageToggle/> </div> : null}
+                    <PracticeCard key={item.documentId} practice={item}>
+                        {item.title == 'i18n' ?  <div className={`mt-4`}> <LanguageToggle/> </div> : null}
                     </PracticeCard>
-                    // </Link>
                 ))
             ) : (
                 <div className="col-span-3 text-center py-12 text-gray-500">

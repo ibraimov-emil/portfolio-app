@@ -2,8 +2,12 @@ import {axiosInstance} from "@/services/axios";
 import {SkillsCombine} from "@/types/skill";
 
 export const getSkills = async (): Promise<SkillsCombine> => {
-    const {data} = await axiosInstance.get('/skills?populate=*');
-    return data
+    const {data} = await axiosInstance.get('/skills', {
+        params: {
+            populate: '*'
+        }
+    });
+    return data;
 }
 
 export async function getMock(): Promise<any> {

@@ -11,7 +11,7 @@ interface SelectedSkillsSummaryProps {
 
 const SelectedSkillsSummary: React.FC<SelectedSkillsSummaryProps> = ({skills}) => {
     const filters = useFilters()
-    
+
     const selectedSkills = skills.data.filter(skill =>
         filters.selectedSkills.has(skill.id.toString())
     )
@@ -25,7 +25,7 @@ const SelectedSkillsSummary: React.FC<SelectedSkillsSummaryProps> = ({skills}) =
             <Title text="Selected Skills Summary" size="xl" className="mb-6 font-semibold"/>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {['advanced', 'medium', 'start'].map(type => {
-                    const skillsByType = selectedSkills.filter(skill => skill.attributes.type === type)
+                    const skillsByType = selectedSkills.filter(skill => skill.type === type)
                     if (skillsByType.length === 0) return null
 
                     return (
@@ -34,9 +34,9 @@ const SelectedSkillsSummary: React.FC<SelectedSkillsSummaryProps> = ({skills}) =
                             <ul className="space-y-2">
                                 {skillsByType.map(skill => (
                                     <li key={skill.id} className="flex items-center justify-between">
-                                        <span>{skill.attributes.name}</span>
+                                        <span>{skill.name}</span>
                                         <span className="text-sm text-gray-500">
-                                            {skill.attributes.experience}
+                                            {skill.experience}
                                         </span>
                                     </li>
                                 ))}

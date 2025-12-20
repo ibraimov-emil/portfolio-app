@@ -26,7 +26,7 @@ export function useCreateCompany() {
 
             // Upload photo if provided
             if (data.photo) {
-                await uploadCompanyPhoto(company.id, data.photo);
+                await uploadCompanyPhoto(company.documentId, data.photo);
             }
 
             return company;
@@ -51,7 +51,7 @@ export function useCreateCompany() {
     });
 }
 
-export function useUpdateCompany(companyId: number) {
+export function useUpdateCompany(companyId: string) {
     const queryClient = useQueryClient();
     const router = useRouter();
     const { toast } = useToast();
@@ -71,7 +71,7 @@ export function useUpdateCompany(companyId: number) {
 
             // Upload new photo if provided
             if (data.photo) {
-                await uploadCompanyPhoto(company.id, data.photo);
+                await uploadCompanyPhoto(company.documentId, data.photo);
             }
 
             return company;
@@ -103,7 +103,7 @@ export function useDeleteCompany() {
     const { toast } = useToast();
 
     return useMutation({
-        mutationFn: async (companyId: number) => {
+        mutationFn: async (companyId: string) => {
             await deleteCompany(companyId);
         },
         onSuccess: () => {

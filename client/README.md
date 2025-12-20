@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Client Application
 
-## Getting Started
+This is a Next.js application with TypeScript, Tailwind CSS, and shadcn/ui components.
 
-First, run the development server:
+## Strapi v5 Migration
+
+The application has been updated to work with Strapi v5. Key changes:
+
+### Type Structure Changes
+
+Strapi v5 uses a flat structure instead of nested `attributes`:
+
+**Before (v4):**
+```typescript
+{
+  data: {
+    id: 1,
+    attributes: {
+      name: "Example",
+      createdAt: "2024-01-01"
+    }
+  }
+}
+```
+
+**After (v5):**
+```typescript
+{
+  data: {
+    documentId: "abc123",
+    id: 1,
+    name: "Example",
+    createdAt: "2024-01-01"
+  }
+}
+```
+
+### Updated Types
+
+All types have been updated to match Strapi v5 structure:
+- `SkillItem` - Skills with flat structure
+- `PracticeItem` - Practice items with flat structure
+- `CompanyItem` - Companies with flat structure
+- `VacancyItem` - Vacancies with flat structure
+
+### RTK Query Implementation
+
+Vacancies CRUD operations are now implemented using RTK Query:
+
+```typescript
+import { 
+  useGetVacanciesQuery,
+  useGetVacancyByIdQuery,
+  useCreateVacancyMutation,
+  useUpdateVacancyMutation,
+  useDeleteVacancyMutation,
+  useUploadVacancyPhotoMutation
+} from '@/store/api/vacancies';
+
+// Example usage
+function VacanciesList() {
+  const { data, isLoading } = useGetVacanciesQuery({ page: 1, pageSize: 10 });
+  const [createVacancy] = useCreateVacancyMutation();
+  
+  // ... component logic
+}
+```
+
+### API Changes
+
+- Use `documentId` instead of `id` for identifying resources
+- Populate syntax remains similar but returns flat structures
+- File uploads still use `files.{fieldName}` format
+
+## Development
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

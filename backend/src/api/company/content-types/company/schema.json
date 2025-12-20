@@ -33,6 +33,12 @@
     },
     "shortDescription": {
       "type": "string"
+    },
+    "vacancies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::vacancy.vacancy",
+      "mappedBy": "company"
     }
   }
 }

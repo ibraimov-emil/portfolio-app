@@ -5,32 +5,30 @@ export interface CompaniesCombine {
     meta: Meta
 }
 
-export interface CompanyLocalizations {
-    data: Array<{
-        id: number;
-        attributes: {
-            name: string;
-            description: string;
-            shortDescription: string;
-            locale: string;
-        };
-    }>;
+// Strapi v5 flat structure for localizations
+export interface CompanyLocalization {
+    documentId: string;
+    id: number;
+    name: string;
+    description: string;
+    shortDescription: string;
+    locale: string;
 }
 
 export interface CompanyItem {
-    id: number
-    attributes: {
-        name: string;
-        createdAt: string;
-        updatedAt: string;
-        publishedAt: string;
-        published?: any;
-        description: string;
-        shortDescription: string;
-        photo: Photo;
-        locale?: string;
-        localizations?: CompanyLocalizations;
-    }
+    documentId: string;
+    id: number;
+    name: string;
+    published: boolean;
+    description: string;
+    shortDescription: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    locale: string;
+    photo?: Photo[];
+    localizations?: CompanyLocalization[];
+    vacancies?: string[];
 }
 
 // Form data types

@@ -15,9 +15,9 @@ const CheckboxFilterGroup: FC<Props> = (props) => {
     const filters = useFilters()
     const t = useTranslations('dictionary');
 
-    const advancedSkills = items?.data.filter(item => item.attributes.type === 'advanced')
-    const mediumSkills = items?.data.filter(item => item.attributes.type === 'medium')
-    const startSkills = items?.data.filter(item => item.attributes.type === 'start')
+    const advancedSkills = items?.data.filter(item => item.type === 'advanced')
+    const mediumSkills = items?.data.filter(item => item.type === 'medium')
+    const startSkills = items?.data.filter(item => item.type === 'start')
 
     return (
         <div className={`flex flex-col gap-x-4 gap-y-5 mt-5`}>
@@ -27,7 +27,7 @@ const CheckboxFilterGroup: FC<Props> = (props) => {
                         {advancedSkills?.map(item =>
                             <FilterCheckbox
                                 key={item.id}
-                                text={item.attributes.name}
+                                text={item.name}
                                 value={item.id}
                                 onCheckedChange={() => filters.setSelectedSkills(item.id.toString())}
                                 checked={filters.selectedSkills?.has(item.id.toString())}
@@ -44,7 +44,7 @@ const CheckboxFilterGroup: FC<Props> = (props) => {
                     {mediumSkills?.map(item =>
                         <FilterCheckbox
                             key={item.id}
-                            text={item.attributes.name}
+                            text={item.name}
                             value={item.id}
                             onCheckedChange={() => filters.setSelectedSkills(item.id.toString())}
                             checked={filters.selectedSkills?.has(item.id.toString())}
@@ -60,7 +60,7 @@ const CheckboxFilterGroup: FC<Props> = (props) => {
                     {startSkills?.map(item =>
                         <FilterCheckbox
                             key={item.id}
-                            text={item.attributes.name}
+                            text={item.name}
                             value={item.id}
                             onCheckedChange={() => filters.setSelectedSkills(item.id.toString())}
                             checked={filters.selectedSkills?.has(item.id.toString())}

@@ -1,0 +1,84 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vacancies",
+  "info": {
+    "singularName": "vacancy",
+    "pluralName": "vacancies",
+    "displayName": "Vacancy"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "salaryMin": {
+      "type": "decimal",
+      "min": 0
+    },
+    "salaryMax": {
+      "type": "decimal",
+      "min": 0
+    },
+    "company": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::company.company",
+      "inversedBy": "vacancies"
+    },
+    "photo": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": false
+    },
+    "location": {
+      "type": "string"
+    },
+    "workFormat": {
+      "type": "enumeration",
+      "enum": [
+        "office",
+        "remote",
+        "hybrid"
+      ],
+      "required": true
+    },
+    "employmentType": {
+      "type": "enumeration",
+      "enum": [
+        "full-time",
+        "part-time",
+        "contract",
+        "freelance",
+        "internship"
+      ],
+      "required": true
+    },
+    "experienceLevel": {
+      "type": "enumeration",
+      "enum": [
+        "no-experience",
+        "junior",
+        "middle",
+        "senior",
+        "lead"
+      ]
+    },
+    "isActive": {
+      "type": "boolean"
+    },
+    "hot": {
+      "type": "boolean"
+    },
+    "contacts": {
+      "type": "json"
+    }
+  }
+}
