@@ -13,8 +13,8 @@ export const NAVBAR = {
             icon: <User />
         },
         {
-            label: 'Resume',
-            href: '/resume',
+            label: 'CV',
+            href: '/cv',
             icon: <FileText />
         }
     ],

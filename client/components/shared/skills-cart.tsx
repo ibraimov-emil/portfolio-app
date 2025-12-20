@@ -14,8 +14,8 @@ interface Props {
 
 const SkillsCart: React.FC<Props> = ({items, className}) => {
     const filters = useFilters()
-    
-    const selectedSkills = items?.data.filter(skill => 
+
+    const selectedSkills = items?.data.filter(skill =>
         filters.selectedSkills.has(skill.id.toString())
     ) || []
 
@@ -46,11 +46,11 @@ const SkillsCart: React.FC<Props> = ({items, className}) => {
                         key={skill.id}
                         className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
                     >
-                        <span className="text-sm font-medium">{skill.attributes.name}</span>
+                        <span className="text-sm font-medium">{skill.name}</span>
                         <button
                             onClick={() => filters.setSelectedSkills(skill.id.toString())}
                             className="hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full p-0.5 transition-colors"
-                            aria-label={`Remove ${skill.attributes.name}`}
+                            aria-label={`Remove ${skill.name}`}
                         >
                             <X className="w-3 h-3" />
                         </button>
