@@ -10,12 +10,39 @@ export interface Pagination {
 }
 
 export interface Photo {
-    data: Datum[];
+    documentId: string;
+    id: number;
+    name: string;
+    alternativeText: string;
+    caption: string;
+    width: number;
+    height: number;
+    formats: string;
+    hash: string;
+    ext: string;
+    mime: string;
+    size: number;
+    url: string;
+    previewUrl: string;
+    provider: string;
+    provider_metadata: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    related: string;
 }
 
 export interface Datum {
+    documentId: string;
     id: number;
-    attributes: PhotoAttributes;
+    name: string;
+    published: boolean;
+    description: string;
+    shortDescription: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    photo: Photo[];
 }
 
 export interface PhotoAttributes {

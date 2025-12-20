@@ -17,25 +17,25 @@ interface IProps {
 const CompanyCard = ({company, hasLink = true}: IProps) => {
     const t = useTranslations('practice');
     const [currentLocale, setCurrentLocale] = useState('en');
-    const [selectedContent, setSelectedContent] = useState(company.attributes);
+    const [selectedContent, setSelectedContent] = useState(company);
     const [showLanguageSelector, setShowLanguageSelector] = useState(false);
 
     useEffect(() => {
         setCurrentLocale(getLocale());
     }, []);
 
-    const hasLocalizations = company.attributes.localizations && 
-                            company.attributes.localizations.data.length > 0;
+    const hasLocalizations = company.localizations &&
+                            company.localizations.length > 0;
 
     const availableLanguages = hasLocalizations
         ? [
-            { code: company.attributes.locale || 'en', content: company.attributes },
-            ...company.attributes.localizations!.data.map(loc => ({
-                code: loc.attributes.locale,
-                content: loc.attributes
+            { code: company.locale || 'en', content: company },
+            ...company.localizations!.map(loc => ({
+                code: loc.locale,
+                content: loc
             }))
           ]
-        : [{ code: company.attributes.locale || 'en', content: company.attributes }];
+        : [{ code: company.locale || 'en', content: company }];
 
     const handleLanguageSelect = (langCode: string) => {
         const selected = availableLanguages.find(lang => lang.code === langCode);
@@ -48,10 +48,12 @@ const CompanyCard = ({company, hasLink = true}: IProps) => {
     return (
         <Card key={company.id} className={'group cursor-pointer h-full relative'}>
             <CardHeader className="flex space-y-6">
-                {company.attributes.photo.data && <div className={'w-100 h-[300px] relative rounded-lg overflow-hidden'}>
+                {company.photo && company.photo.length > 0 && <div className={'w-100 h-[300px] relative rounded-lg overflow-hidden'}>
                     <Image
-                        src={process.env.NEXT_PUBLIC_API_URL_IMAGE + company.attributes.photo.data[0].attributes.url}
-                        alt={''} fill={true} objectFit={'cover'}
+                        src={process.env.NEXT_PUBLIC_API_URL_IMAGE + company.photo[0].url}
+                        alt={selectedContent.name} 
+                        fill={true} 
+                        style={{ objectFit: 'cover' }}
                         className={'group-hover:scale-115 transition-transform duration-500 '}/>
                 </div>}
                 <div className="flex items-start justify-between gap-2">
@@ -76,7 +78,7 @@ const CompanyCard = ({company, hasLink = true}: IProps) => {
                 <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
                     {selectedContent.shortDescription}
                 </p>
-                
+
                 {hasLocalizations && !hasLink && showLanguageSelector && (
                     <div className="mt-4 space-y-2">
                         <p className="text-xs text-muted-foreground">{t('selectLanguage')}:</p>

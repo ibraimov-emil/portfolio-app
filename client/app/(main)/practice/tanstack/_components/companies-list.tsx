@@ -103,15 +103,15 @@ export function CompaniesList() {
                     ) : (
                         <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
                             {allCompanies.map((company) => {
-                                const hasLocalizations = company.attributes.localizations && 
-                                                        company.attributes.localizations.data.length > 0;
-                                
+                                const hasLocalizations = company.localizations &&
+                                                        company.localizations.length > 0;
+
                                 return hasLocalizations ? (
-                                    <CompanyCard key={company.id} company={company} hasLink={false} />
+                                    <CompanyCard key={company.documentId} company={company} hasLink={false} />
                                 ) : (
                                     <Link
-                                        href={`/practice/tanstack/company/${company.id}`}
-                                        key={company.id}
+                                        href={`/practice/tanstack/company/${company.documentId}`}
+                                        key={company.documentId}
                                     >
                                         <CompanyCard company={company} hasLink={true} />
                                     </Link>

@@ -1,42 +1,24 @@
-import {Meta} from "@/types/general";
+import type { Meta, Photo } from "@/types/general";
+import type { SkillItem } from "@/types/skill";
 
+// Strapi v5 flat structure
 export interface PracticesCombine {
-    data: PracticeItem[]
-    meta: Meta
+    data: PracticeItem[];
+    meta: Meta;
 }
 
 export interface PracticeItem {
-    id: number
-    attributes: {
-        title: string
-        description: string
-        componentName?: string
-        link?: string
-        componentLink?: string
-        skills?: {
-            data: Array<{
-                id: number
-                attributes: {
-                    name: string
-                    experience: string
-                    type: string
-                }
-            }>
-        }
-        Preview?: {
-            data: Array<{
-                id: number
-                attributes: {
-                    url: string
-                    name: string
-                    mime: string
-                }
-            }>
-        }
-        createdAt: string
-        updatedAt: string
-        publishedAt: string
-    }
+    documentId: string;
+    id: number;
+    title: string;
+    description: string;
+    componentName?: string;
+    link?: string;
+    componentLink?: string;
+    skills?: SkillItem[];
+    Preview?: Photo[];
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    locale: string;
 }
-
-

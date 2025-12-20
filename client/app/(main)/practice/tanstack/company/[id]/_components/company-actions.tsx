@@ -21,7 +21,7 @@ import {
 import { useDeleteCompany } from "@/hooks/use-company-mutations";
 
 interface CompanyActionsProps {
-    companyId: number;
+    companyId: string;
     companyName: string;
 }
 
