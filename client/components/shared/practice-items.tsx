@@ -2,26 +2,26 @@
 import React from 'react'
 import ErrorHandler from "@/components/shared/ErrorHandler";
 import PracticeCard from "@/components/shared/practice-card";
-import {cn} from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
-import {PracticesCombine} from "@/types/practice";
-import {LanguageToggle} from "@/components/shared/language-toggle";
+import { PracticesCombine } from "@/types/practice";
+import { LanguageToggle } from "@/components/shared/language-toggle";
 
 interface PracticeItemsProps {
     practice: PracticesCombine
 }
 
-const PracticeItems: React.FC<PracticeItemsProps> = ({practice}) => {
+const PracticeItems: React.FC<PracticeItemsProps> = ({ practice }) => {
     if (!practice) {
-        return <ErrorHandler error="Failed to load practices"/>
+        return <ErrorHandler error="Failed to load practices" />
     }
 
     return (
-        <div className={cn('grid grid-cols-3 gap-7')}>
+        <div className={cn('grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7')}>
             {practice.data.length > 0 ? (
                 practice.data.map(item => (
                     <PracticeCard key={item.documentId} practice={item}>
-                        {item.title == 'i18n' ?  <div className={`mt-4`}> <LanguageToggle/> </div> : null}
+                        {item.title == 'i18n' ? <div className={`mt-4`}> <LanguageToggle /> </div> : null}
                     </PracticeCard>
                 ))
             ) : (

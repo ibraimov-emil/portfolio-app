@@ -2,7 +2,7 @@
 import type React from 'react';
 
 
-export default function TanstackLayout({
+export default function RTKLayout({
                                            children,
                                        }: {
     children: React.ReactNode;

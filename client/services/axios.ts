@@ -1,9 +1,13 @@
 import axios from 'axios';
+import qs from 'qs';
 import { getCookie, deleteCookie, COOKIE_NAMES } from '@/lib/cookies';
 import { isTokenExpired } from '@/lib/jwt';
 
 export const axiosInstance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
+    paramsSerializer: {
+        serialize: (params) => qs.stringify(params, { encodeValuesOnly: true })
+    }
 });
 
 // Add request interceptor to attach JWT token from cookie

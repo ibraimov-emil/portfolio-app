@@ -46,5 +46,17 @@
     "deleteConfirmDescription": "This will permanently delete {name}. This action cannot be undone.",
     "cancel": "Cancel",
     "selectLanguageVersion": "Select language version"
+  },
+  "VacancyDetail": {
+    "backToVacancies": "Back to Vacancies",
+    "edit": "Edit",
+    "delete": "Delete",
+    "about": "About",
+    "created": "Created",
+    "lastUpdated": "Last Updated",
+    "deleteConfirmTitle": "Are you sure?",
+    "deleteConfirmDescription": "This will permanently delete {name}. This action cannot be undone.",
+    "cancel": "Cancel",
+    "selectLanguageVersion": "Select language version"
   }
 }

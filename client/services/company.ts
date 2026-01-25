@@ -2,15 +2,12 @@ import { axiosInstance } from "@/services/axios";
 import type { CompaniesCombine, CompanyCreatePayload, CompanyItem } from "@/types/company";
 
 export const getCompanies = async (params: any): Promise<CompaniesCombine> => {
-    const { data } = await axiosInstance.get('/companies', { 
+    const { data } = await axiosInstance.get('/companies', {
         params: {
-            ...params,
             populate: {
                 photo: true,
-                localizations: {
-                    fields: ['name', 'description', 'shortDescription', 'locale']
-                }
-            }
+            },
+            ...params,
         }
     });
     console.log(data)
@@ -18,10 +15,11 @@ export const getCompanies = async (params: any): Promise<CompaniesCombine> => {
     return data;
 }
 
-export const getCompanyById = async (id: string): Promise<{ data: CompanyItem }> => {
+export const getCompanyById = async (id: string, params: any = {}): Promise<{ data: CompanyItem }> => {
     const { data } = await axiosInstance.get(`/companies/${id}`, {
         params: {
-            populate: ['photo', 'localizations']
+            populate: ['photo'],
+            ...params
         }
     });
     console.log('getCompanyById', data)
