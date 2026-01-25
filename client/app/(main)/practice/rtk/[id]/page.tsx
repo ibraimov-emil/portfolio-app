@@ -9,10 +9,15 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { ArrowLeft, MapPin, Briefcase, Clock, DollarSign } from 'lucide-react';
 import Link from 'next/link';
 import type { PageParams } from '@/types/general';
+import { BlocksRenderer } from '@/components/shared/blocks-renderer';
+import { VacancyActions } from "./_components/vacancy-actions";
+import { useTranslations } from "next-intl";
 
 export default function VacancyDetailPage({ params }: PageParams) {
   const { id } = use(params);
   const { data, isLoading, error } = useGetVacancyByIdQuery(id);
+
+  const t = useTranslations('vacancyDetail');
 
   if (isLoading) {
     return (
@@ -47,12 +52,18 @@ export default function VacancyDetailPage({ params }: PageParams) {
 
   return (
     <div className="container mx-auto py-8">
-      <Link href="/vacancies">
-        <Button variant="ghost" className="mb-6">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Vacancies
-        </Button>
-      </Link>
+      <div className="mb-6 flex items-center justify-between">
+        <Link href="/practice/tanstack">
+          <Button variant="ghost" size="sm">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            {t('backToCompanies')}
+          </Button>
+        </Link>
+        <VacancyActions
+          vacancyId={vacancy.documentId}
+          vacancyName={vacancy.title}
+        />
+      </div>
 
       <Card>
         <CardHeader>
@@ -109,7 +120,7 @@ export default function VacancyDetailPage({ params }: PageParams) {
 
           <div>
             <h3 className="text-lg font-semibold mb-2">Description</h3>
-            <p className="text-muted-foreground whitespace-pre-wrap">{vacancy.description}</p>
+            <BlocksRenderer content={vacancy.description} />
           </div>
 
           <div>
@@ -120,16 +131,13 @@ export default function VacancyDetailPage({ params }: PageParams) {
           {vacancy.contacts && (
             <div>
               <h3 className="text-lg font-semibold mb-2">Contacts</h3>
-              <p className="text-muted-foreground">{vacancy.contacts}</p>
+              <p className="text-muted-foreground">
+                {typeof vacancy.contacts === 'string'
+                  ? vacancy.contacts
+                  : (vacancy.contacts as any).text || JSON.stringify(vacancy.contacts)}
+              </p>
             </div>
           )}
-
-          <div className="flex gap-2 pt-4">
-            <Link href={`/vacancies/${vacancy.documentId}/edit`} className="flex-1">
-              <Button className="w-full">Edit Vacancy</Button>
-            </Link>
-            <Button variant="outline">Apply Now</Button>
-          </div>
         </CardContent>
       </Card>
     </div>

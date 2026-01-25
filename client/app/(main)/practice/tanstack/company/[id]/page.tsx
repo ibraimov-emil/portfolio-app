@@ -14,25 +14,21 @@ import { CompanyLanguageSelector } from "./_components/company-language-selector
 
 export default async function CompanyDetailPage({ params }: PageParams) {
     const { id } = await params;
-
     try {
         const [{ data: company }, messages, locale] = await Promise.all([
             getCompanyById(id),
             getServerTranslations(),
             getServerLocale()
         ]);
-
         const t = createServerTranslator(messages);
-
         // Check if company has localizations
-        const hasLocalizations = company.localizations && 
-                                company.localizations.length > 0;
-
+        const hasLocalizations = company.localizations &&
+            company.localizations.length > 0;
         // Get all available language versions
         const languageVersions = hasLocalizations
             ? [
-                { 
-                    locale: company.locale || 'en', 
+                {
+                    locale: company.locale || 'en',
                     name: company.name,
                     shortDescription: company.shortDescription,
                     description: company.description
@@ -43,7 +39,7 @@ export default async function CompanyDetailPage({ params }: PageParams) {
                     shortDescription: loc.shortDescription,
                     description: loc.description
                 }))
-              ]
+            ]
             : null;
 
         // Find content matching current locale or fallback to default
@@ -54,7 +50,7 @@ export default async function CompanyDetailPage({ params }: PageParams) {
                 name: company.name,
                 shortDescription: company.shortDescription,
                 description: company.description
-              };
+            };
 
         return (
             <Container className="py-8">
@@ -65,8 +61,8 @@ export default async function CompanyDetailPage({ params }: PageParams) {
                             {t('companyDetail.backToCompanies')}
                         </Button>
                     </Link>
-                    <CompanyActions 
-                        companyId={company.documentId} 
+                    <CompanyActions
+                        companyId={company.documentId}
                         companyName={currentContent.name}
                     />
                 </div>
@@ -96,7 +92,7 @@ export default async function CompanyDetailPage({ params }: PageParams) {
                                         </CardDescription>
                                     </div>
                                     {languageVersions && languageVersions.length > 1 && (
-                                        <CompanyLanguageSelector 
+                                        <CompanyLanguageSelector
                                             versions={languageVersions}
                                             currentLocale={currentContent.locale}
                                         />

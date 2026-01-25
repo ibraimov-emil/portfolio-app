@@ -46,5 +46,17 @@
     "deleteConfirmDescription": "Это навсегда удалит {name}. Это действие нельзя отменить.",
     "cancel": "Отмена",
     "selectLanguageVersion": "Выберите языковую версию"
+  },
+  "VacancyDetail": {
+    "backToVacancies": "Назад к вакансиям",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "about": "Описание",
+    "created": "Создано",
+    "lastUpdated": "Обновлено",
+    "deleteConfirmTitle": "Вы уверены?",
+    "deleteConfirmDescription": "Это навсегда удалит {name}. Это действие нельзя отменить.",
+    "cancel": "Отмена",
+    "selectLanguageVersion": "Выберите языковую версию"
   }
 }

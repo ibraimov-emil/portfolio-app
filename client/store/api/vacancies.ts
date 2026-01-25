@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { 
-  VacanciesCombine, 
-  VacancyItem, 
-  VacancyCreatePayload, 
-  VacancyUpdatePayload 
+import qs from 'qs';
+import type {
+  VacanciesCombine,
+  VacancyItem,
+  VacancyCreatePayload,
+  VacancyUpdatePayload
 } from '@/types/vacancy';
 import { getCookie, COOKIE_NAMES } from '@/lib/cookies';
 
@@ -17,6 +18,9 @@ export const vacanciesApi = createApi({
         headers.set('Authorization', `Bearer ${token}`);
       }
       return headers;
+    },
+    paramsSerializer: (params) => {
+      return qs.stringify(params, { encodeValuesOnly: true });
     },
   }),
   tagTypes: ['Vacancy'],
