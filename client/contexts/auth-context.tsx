@@ -12,6 +12,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [loginOpen, setLoginOpen] = useState(false);
     const { toast } = useToast();
 
     // Initialize auth on mount
@@ -118,10 +119,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             value={{
                 user,
                 isLoading,
+                loginOpen,
                 isAuthenticated: !!user,
                 login,
                 register,
                 logout,
+                setLoginOpen
             }}
         >
             {children}

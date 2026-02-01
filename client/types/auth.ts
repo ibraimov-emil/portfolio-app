@@ -28,8 +28,10 @@ export interface RegisterCredentials {
 export interface AuthContextType {
     user: User | null;
     isLoading: boolean;
+    loginOpen: boolean;
     isAuthenticated: boolean;
     login: (credentials: LoginCredentials) => Promise<void>;
     register: (credentials: RegisterCredentials) => Promise<void>;
     logout: () => Promise<void>;
+    setLoginOpen: (value: boolean) => void;
 }

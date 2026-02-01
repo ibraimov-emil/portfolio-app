@@ -10,8 +10,7 @@ import { RegisterDialog } from "./register-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export function AuthButton() {
-    const { isAuthenticated, isLoading } = useAuth();
-    const [loginOpen, setLoginOpen] = useState(false);
+    const { isAuthenticated, isLoading, loginOpen, setLoginOpen } = useAuth();
     const [registerOpen, setRegisterOpen] = useState(false);
 
     const handleSwitchToRegister = () => {

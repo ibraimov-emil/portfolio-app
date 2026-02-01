@@ -47,7 +47,7 @@
     "cancel": "Cancel",
     "selectLanguageVersion": "Select language version"
   },
-  "VacancyDetail": {
+  "vacancyDetail": {
     "backToVacancies": "Back to Vacancies",
     "edit": "Edit",
     "delete": "Delete",

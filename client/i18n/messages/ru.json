@@ -47,7 +47,7 @@
     "cancel": "Отмена",
     "selectLanguageVersion": "Выберите языковую версию"
   },
-  "VacancyDetail": {
+  "vacancyDetail": {
     "backToVacancies": "Назад к вакансиям",
     "edit": "Редактировать",
     "delete": "Удалить",

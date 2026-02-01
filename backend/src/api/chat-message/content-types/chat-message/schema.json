@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "chat_messages",
+  "info": {
+    "singularName": "chat-message",
+    "pluralName": "chat-messages",
+    "displayName": "Chat Message",
+    "description": "Messages sent in chat rooms"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "text": {
+      "type": "text",
+      "required": true
+    },
+    "room": {
+      "type": "string",
+      "required": true
+    },
+    "senderName": {
+      "type": "string",
+      "required": true
+    },
+    "senderId": {
+      "type": "string",
+      "required": false
+    },
+    "isAuthenticated": {
+      "type": "boolean",
+      "default": false
+    },
+    "isSystemMessage": {
+      "type": "boolean",
+      "default": false
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

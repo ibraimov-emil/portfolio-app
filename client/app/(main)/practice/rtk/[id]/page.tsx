@@ -56,7 +56,7 @@ export default function VacancyDetailPage({ params }: PageParams) {
         <Link href="/practice/tanstack">
           <Button variant="ghost" size="sm">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            {t('backToCompanies')}
+            {t('backToVacancies')}
           </Button>
         </Link>
         <VacancyActions
