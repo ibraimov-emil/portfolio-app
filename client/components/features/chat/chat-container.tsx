@@ -1,15 +1,16 @@
-'use client';
-
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { ChatMessage } from './chat-message';
 import { ChatInput } from './chat-input';
 import { useChat } from '@/hooks/use-chat';
 import type { ChatRoom } from '@/types/chat';
-import { Loader2 } from 'lucide-react';
+import { Loader2, History, ChevronDown } from 'lucide-react';
+import { format } from 'date-fns';
 
 interface ChatContainerProps {
   room: ChatRoom;
@@ -33,10 +34,18 @@ export function ChatContainer({
   const scrollRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom when new messages arrive
+  // Filter messages
+  // We use the 'isSystemMessage' flag if available, or fallback to checking sender 'System'
+  const isSystemMsg = (msg: any) => msg.isSystemMessage || msg.sender.name === 'System';
+
+  const displayMessages = messages.filter(m => !isSystemMsg(m));
+  const systemMessages = messages.filter(m => isSystemMsg(m)).reverse();
+  const latestSystemMessage = systemMessages.length > 0 ? systemMessages[systemMessages.length - 1] : null;
+
+  // Auto-scroll to bottom when new DISPLAY messages arrive
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [displayMessages.length, isTyping]); // Only scroll on new visible messages
 
   if (!isConnected) {
     return (
@@ -65,32 +74,75 @@ export function ChatContainer({
 
   return (
     <Card className="h-full flex flex-col">
-      <CardHeader className="border-b">
+      <CardHeader className="border-b py-3">
         <div className="flex items-center justify-between">
-          <div>
-            <CardTitle>{room.name}</CardTitle>
-            {room.description && (
-              <CardDescription>{room.description}</CardDescription>
-            )}
+          <div className="flex flex-col gap-0.5">
+            <div className="flex items-center gap-2">
+              <CardTitle className="text-lg">{room.name}</CardTitle>
+              <Badge variant={isConnected ? 'outline' : 'secondary'} className="text-[10px] h-5 px-1.5 font-normal">
+                {isConnected ? 'Online' : 'Offline'}
+              </Badge>
+            </div>
+
+            {/* System Message / Status Dropdown */}
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="ghost" size="sm" className="h-auto p-0 hover:bg-transparent justify-start font-normal text-muted-foreground">
+                  <span className="text-xs truncate max-w-[250px] flex items-center gap-1">
+                    {latestSystemMessage ? (
+                      <span className={latestSystemMessage.text.includes('left') ? 'text-orange-500/70' : 'text-green-500/70'}>
+                        {latestSystemMessage.text}
+                      </span>
+                    ) : (
+                      room.description || "Chat Room"
+                    )}
+                    <ChevronDown className="h-3 w-3 opacity-50" />
+                  </span>
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent align="start" className="w-[300px] p-0">
+                <div className="p-2 border-b text-xs font-semibold bg-muted/50">
+                  Connection History
+                </div>
+                <ScrollArea className="h-[200px] p-2">
+                  {systemMessages.length === 0 ? (
+                    <div className="text-xs text-muted-foreground text-center py-4">No activity yet</div>
+                  ) : (
+                    <div className="space-y-2">
+                      {systemMessages.map((msg) => (
+                        <div key={msg.id} className="text-xs flex justify-between items-start gap-2">
+                          <span className={msg.text.includes('left') ? 'text-muted-foreground' : 'text-foreground'}>
+                            {msg.text}
+                          </span>
+                          <span className="text-[10px] text-muted-foreground whitespace-nowrap opacity-70">
+                            {format(new Date(msg.timestamp), 'HH:mm')}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </ScrollArea>
+              </PopoverContent>
+            </Popover>
           </div>
-          <Badge variant={isConnected ? 'default' : 'secondary'}>
-            {isConnected ? 'Connected' : 'Disconnected'}
-          </Badge>
-        </div>
-        <div className="text-xs text-muted-foreground mt-2">
-          Chatting as: <span className="font-medium">{userName}</span>
-          {isAuthenticated && <span className="ml-1">(Verified)</span>}
+
+          <div className="text-right">
+            <div className="text-xs text-muted-foreground">
+              <span className="font-medium">{userName}</span>
+              {isAuthenticated && <span className="ml-1 text-[10px] border px-1 rounded">Verified</span>}
+            </div>
+          </div>
         </div>
       </CardHeader>
 
       <ScrollArea className="flex-1 p-4">
         <div ref={scrollRef}>
-          {messages.length === 0 ? (
+          {displayMessages.length === 0 ? (
             <div className="text-center py-8">
               <p className="text-muted-foreground">No messages yet. Start the conversation!</p>
             </div>
           ) : (
-            messages.map((message) => (
+            displayMessages.map((message) => (
               <ChatMessage
                 key={message.id}
                 message={message}
