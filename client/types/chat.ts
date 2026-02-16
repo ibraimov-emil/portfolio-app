@@ -8,6 +8,7 @@ export interface ChatMessage {
   };
   timestamp: Date;
   room: string;
+  isSystemMessage?: boolean;
 }
 
 export interface ChatRoom {
