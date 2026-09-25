@@ -1,0 +1,86 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "gitSource": {
+    "type": "github",
+    "repo": "emil"
+  },
+  "projectConfigurations": [
+    {
+      "id": "emil-client",
+      "root": "client",
+      "framework": "nextjs",
+      "env": {
+        "NEXT_PUBLIC_API_URL": "@NEXT_PUBLIC_API_URL",
+        "NEXT_PUBLIC_STRAPI_URL": "@NEXT_PUBLIC_STRAPI_URL",
+        "NEXT_PUBLIC_PYTHON_API_URL": "@NEXT_PUBLIC_PYTHON_API_URL"
+      },
+      "headers": [
+        {
+          "src": "/(.*)",
+          "headers": [
+            { "key": "Access-Control-Allow-Origin", "value": "*" },
+            { "key": "Access-Control-Allow-Methods", "value": "GET,HEAD,PUT,PATCH,POST,DELETE" },
+            { "key": "Access-Control-Allow-Headers", "value": "*" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "emil-backend",
+      "root": "backend",
+      "source": "docker",
+      "framework": null,
+      "env": {
+        "NODE_OPTIONS": "--dns-result-order=ipv4first",
+        "NODE_ENV": "production",
+        "PORT": "1337",
+        "HOST": "0.0.0.0",
+        "DATABASE_CLIENT": "postgres",
+        "DATABASE_URL": "@DATABASE_URL",
+        "DATABASE_HOST": "@DATABASE_HOST",
+        "DATABASE_PORT": "5432",
+        "DATABASE_NAME": "@DATABASE_NAME",
+        "DATABASE_USERNAME": "@DATABASE_USERNAME",
+        "DATABASE_PASSWORD": "@DATABASE_PASSWORD",
+        "DATABASE_SSL": "true",
+        "DATABASE_SSL_REJECT_UNAUTHORIZED": "false",
+        "APP_KEYS": "@APP_KEYS",
+        "API_TOKEN_SALT": "@API_TOKEN_SALT",
+        "ADMIN_JWT_SECRET": "@ADMIN_JWT_SECRET",
+        "TRANSFER_TOKEN_SALT": "@TRANSFER_TOKEN_SALT",
+        "JWT_SECRET": "@JWT_SECRET"
+      }
+    },
+    {
+      "id": "emil-python",
+      "root": "python-backend",
+      "source": "docker",
+      "framework": null,
+      "env": {
+        "PYTHONUNBUFFERED": "1",
+        "PORT": "8000",
+        "PYTHONPATH": "/app",
+        "DATABASE_URL": "@DATABASE_URL",
+        "JWT_SECRET": "@JWT_SECRET",
+        "SECRET_KEY": "@SECRET_KEY",
+        "DJANGO_SETTINGS_MODULE": "config.settings",
+        "CORS_ALLOW_ALL_ORIGINS": "true",
+        "NEXT_PUBLIC_API_URL": "@NEXT_PUBLIC_API_URL",
+        "NEXT_PUBLIC_STRAPI_URL": "@NEXT_PUBLIC_STRAPI_URL",
+        "NEXT_PUBLIC_PYTHON_API_URL": "@NEXT_PUBLIC_PYTHON_API_URL"
+      }
+    }
+  ],
+  "crons": [],
+  "routes": [],
+  "headers": [
+    {
+      "src": "/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,HEAD,PUT,PATCH,POST,DELETE" },
+        { "key": "Access-Control-Allow-Headers", "value": "*" }
+      ]
+    }
+  ]
+}
