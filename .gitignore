@@ -45,7 +45,10 @@ yarn-error.log*
 coverage/
 *.tsbuildinfo
 
-# Docker
+# Strapi
+.strapi/
+.strapi-updater.json
+.strapi-cloud.json
 
 # Python
 __pycache__/
