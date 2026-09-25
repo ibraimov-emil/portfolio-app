@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  strapi-backend:
+    build: ./backend
+    ports:
+      - "1337:1337"
+    env_file:
+      - backend/.env
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/config:/app/config
+      - ./backend/.tmp:/app/.tmp
+    stdin_open: true
+    tty: true
+    profiles:
+      - dev
+
+  python-backend:
+    build: ./python-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - python-backend/.env
+    volumes:
+      - ./python-backend:/app
+    profiles:
+      - dev
+
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NEXT_PUBLIC_STRAPI_URL=http://localhost:1337
+      - NEXT_PUBLIC_PYTHON_API_URL=http://localhost:8000
+    volumes:
+      - ./client:/app
+    profiles:
+      - dev
