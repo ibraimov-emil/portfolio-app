@@ -27,7 +27,7 @@ export function FoundationCalculator() {
     const addItem = useCartStore((state) => state.addItem);
 
     const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(formSchema) as any,
         defaultValues: {
             length: 10,
             width: 10,

@@ -11,7 +11,7 @@ export interface VacancyItem {
     documentId: string;
     id: number;
     title: string;
-    description: string;
+    description: string | any[];
     salaryMin: number;
     salaryMax: number;
     location: string;
@@ -20,7 +20,7 @@ export interface VacancyItem {
     experienceLevel: string;
     isActive: boolean;
     hot: boolean;
-    contacts: string;
+    contacts: string | any;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;

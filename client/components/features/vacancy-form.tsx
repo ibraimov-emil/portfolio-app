@@ -74,7 +74,7 @@ export function VacancyForm({ initialData, onSubmit, isLoading, title }: Vacancy
     const { data: companiesData, isLoading: isCompaniesLoading } = useGetAllCompaniesQuery();
 
     const form = useForm<VacancyFormValues>({
-        resolver: zodResolver(vacancySchema),
+        resolver: zodResolver(vacancySchema) as any,
         defaultValues: {
             title: "",
             description: "",
