@@ -7,3 +7,4 @@ python-jose[cryptography]
 pydantic
 dj-database-url
 django-filter
+gunicorn
