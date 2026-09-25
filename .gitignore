@@ -1,3 +1,6 @@
 # Auto Claude data directory
 .auto-claude/
 .env
+.env.development
+.env.production
+.env.test
