@@ -102,16 +102,20 @@ node_modules
 coverage
 
 ############################
-# Strapi
+# Build artifacts
+############################
+
+dist
+build
+.node_modules
+node_modules
+.tmp
+
+############################
+# Env files (use .env.production.example as template)
 ############################
 
 .env
 .env.development
 .env.local
-license.txt
-exports
-.strapi
-dist
-build
-.strapi-updater.json
-.strapi-cloud.json
+.env.production
