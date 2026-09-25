@@ -1,8 +1,57 @@
 # Auto Claude data directory
 .auto-claude/
+
+# Env files (use .env.example as template)
 .env
 .env.development
 .env.production
 .env.test
-.env
-client/.env
+.env.production.example
+.env.example
+.env.local
+
+# Dependencies
+node_modules/
+**/node_modules/
+python-backend/__pycache__/
+python-backend/**/__pycache__/
+
+# Build artifacts
+dist/
+build/
+.next/
+.vercel/
+*.egg-info/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Misc
+coverage/
+*.tsbuildinfo
+
+# Docker
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Vercel cache
+.vercel
