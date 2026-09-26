@@ -1,14 +1,14 @@
 # Auto Claude data directory
 .auto-claude/
 
-# Env files (use .env.example as template)
+# Env files
 .env
 .env.development
 .env.production
 .env.test
+.env.local
 .env.production.example
 .env.example
-.env.local
 
 # Dependencies
 node_modules/
@@ -56,5 +56,5 @@ __pycache__/
 .venv/
 venv/
 
-# Vercel cache
+# Vercel
 .vercel
