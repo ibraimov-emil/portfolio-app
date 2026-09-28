@@ -8,3 +8,4 @@ pydantic
 dj-database-url
 django-filter
 gunicorn
+whitenoise
