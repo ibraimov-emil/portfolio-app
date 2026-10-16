@@ -1,4 +1,4 @@
-FROM node:22-alpine AS builder
+FROM node:20-alpine AS builder
 
 RUN apk add --no-cache make gcc g++ python3
 
@@ -14,7 +14,7 @@ RUN npm run build
 
 RUN sed -i 's/dns\.lookup(this\.host, function/dns.lookup(this.host, {family: 4}, function/' node_modules/pg/lib/connection-parameters.js && printf '\nconst dns = require("dns");\nconst net = require("net");\n' | cat - node_modules/pg/lib/connection.js > /tmp/conn.js && mv /tmp/conn.js node_modules/pg/lib/connection.js && sed -i 's/this\.stream\.connect(port, host)/if(net.isIP(host)){this.stream.connect(port, host)}else{dns.lookup(host,{family:4},(err,address)=>{if(err)return this.emit("error",err);this.stream.connect(port, address)})}/' node_modules/pg/lib/connection.js
 
-FROM node:22-alpine AS production
+FROM node:20-alpine AS production
 
 RUN apk add --no-cache curl
 
