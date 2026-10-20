@@ -3,7 +3,6 @@ import React from 'react'
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {PracticeItem} from "@/types/practice";
 import Image from "next/image";
-import { getStrapiMediaUrl } from "@/lib/utils";
 
 interface PracticeCardProps {
     practice: PracticeItem,
@@ -19,7 +18,7 @@ const PracticeCard: React.FC<PracticeCardProps> = ({practice, children}) => {
             {previewImage && (
                 <div className="relative w-full h-48 overflow-hidden rounded-t-lg">
                     <Image
-                        src={getStrapiMediaUrl(previewImage.url)}
+                        src={process.env.NEXT_PUBLIC_API_URL_IMAGE + previewImage.url}
                         alt={practice.title}
                         fill
                         className="object-cover"
