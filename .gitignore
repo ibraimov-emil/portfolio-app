@@ -19,6 +19,8 @@ python-backend/**/__pycache__/
 # Build artifacts
 dist/
 build/
+staticfiles/
+python-backend/staticfiles/
 .next/
 .vercel/
 *.egg-info/
