@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
 import type { PageParams } from "@/types/general";
+import { getStrapiMediaUrl } from "@/lib/utils";
 import { Container } from "@/components/shared/container";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -73,10 +74,7 @@ export default async function CompanyDetailPage({ params }: PageParams) {
                             {company.photo && company.photo.length > 0 && (
                                 <div className="relative h-32 w-32 flex-shrink-0 overflow-hidden rounded-lg">
                                     <Image
-                                        src={
-                                            process.env.NEXT_PUBLIC_API_URL_IMAGE +
-                                            company.photo[0].url
-                                        }
+                                        src={getStrapiMediaUrl(company.photo[0].url)}
                                         alt={currentContent.name}
                                         fill
                                         className="object-cover"

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Languages } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { getLocale } from "@/lib/locale";
+import { getStrapiMediaUrl } from "@/lib/utils";
 
 interface IProps {
     company: CompanyItem;
@@ -50,7 +51,7 @@ const CompanyCard = ({company, hasLink = true}: IProps) => {
             <CardHeader className="flex space-y-6">
                 {company.photo && company.photo.length > 0 && <div className={'w-100 h-[300px] relative rounded-lg overflow-hidden'}>
                     <Image
-                        src={process.env.NEXT_PUBLIC_API_URL_IMAGE + company.photo[0].url}
+                        src={getStrapiMediaUrl(company.photo[0].url)}
                         alt={selectedContent.name} 
                         fill={true} 
                         style={{ objectFit: 'cover' }}

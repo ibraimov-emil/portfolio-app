@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "cv-emil.vercel.app",
+        hostname: "portfolio-app-one-rouge.vercel.app",
         pathname: "/uploads/**",
       },
     ],
